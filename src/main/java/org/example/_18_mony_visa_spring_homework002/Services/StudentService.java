@@ -8,4 +8,6 @@ public interface StudentService {
     List<Students> getStudent(Integer limit, Integer offset);
     Students findstudentById(Integer id);
     Students deleteStudent(Integer id);
+    Students addStudent(Students students);
+    Students updateStudent(Integer updateStudent, Students students);
 }

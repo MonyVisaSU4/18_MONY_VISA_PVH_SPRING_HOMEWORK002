@@ -38,12 +38,24 @@ public interface StudentRepository {
     @ResultMap("studentMapper")
     Students findstudentById(Integer id);
 
-//    Not Finish
-    @Select("""
-        DELETE FROM students WHERE student_id = #{id}
-        RETURNING *;
+    @Insert("""
+        DELETE FROM students WHERE student_id = #{id};
     """)
     @ResultMap("studentMapper")
     Students deleteStudent(Integer id);
 
+    @Select("""
+        INSERT INTO students(student_id,student_name,email,phone_number)
+        VALUES(default,#{request.studentName},#{request.email},#{request.phoneNumber})
+        RETURNING *;
+    """)
+    @ResultMap("studentMapper")
+    Students addStudent(@Param("request") Students students);
+
+    @Select("""
+        UPDATE students SET student_name='Visa', email='visazin128@gmail.com', phone_number='092822882'
+        WHERE student_id=6
+        RETURNING *;
+    """)
+    Students update(Integer updateStudent, Students students);
 }

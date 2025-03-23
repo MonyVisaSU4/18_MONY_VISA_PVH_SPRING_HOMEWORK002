@@ -48,4 +48,24 @@ public class StudentController {
                 .time(LocalDateTime.now()).build();
         return ResponseEntity.ok(apiResponse);
     }
+
+    @PostMapping("/addStudent")
+    public ResponseEntity<ApiResponse<Students>> addStudent(@RequestBody Students students){
+        ApiResponse<Students> apiResponse = ApiResponse.<Students>builder()
+                .message("All courses have been successfully fetched.")
+                .payload(studentService.addStudent(students))
+                .status(HttpStatus.OK)
+                .time(LocalDateTime.now()).build();
+        return ResponseEntity.ok(apiResponse);
+    }
+
+    @PutMapping("/{updateStudent}")
+    public ResponseEntity<ApiResponse<Students>> updateStudent(@RequestParam Integer updateStudent, @RequestBody Students students){
+        ApiResponse<Students> apiResponse = ApiResponse.<Students>builder()
+                .message("All courses have been successfully fetched.")
+                .payload(studentService.updateStudent(updateStudent, students))
+                .status(HttpStatus.OK)
+                .time(LocalDateTime.now()).build();
+        return ResponseEntity.ok(apiResponse);
+    }
 }

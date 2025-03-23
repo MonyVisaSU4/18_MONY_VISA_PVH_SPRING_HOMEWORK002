@@ -27,6 +27,17 @@ public class StudentServiceimpl implements StudentService {
 
     @Override
     public Students deleteStudent(Integer id) {
-        return studentRepository.deleteStudent(id);
+        studentRepository.deleteStudent(id);
+        return studentRepository.findstudentById(id);
+    }
+
+    @Override
+    public Students addStudent(Students students) {
+        return studentRepository.addStudent(students);
+    }
+
+    @Override
+    public Students updateStudent(Integer updateStudent, Students students) {
+        return studentRepository.update(updateStudent, students);
     }
 }
