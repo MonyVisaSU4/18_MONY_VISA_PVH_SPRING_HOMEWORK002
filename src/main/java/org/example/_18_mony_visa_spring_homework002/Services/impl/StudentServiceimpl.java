@@ -1,5 +1,6 @@
 package org.example._18_mony_visa_spring_homework002.Services.impl;
 
+import org.example._18_mony_visa_spring_homework002.Models.DTO.Requests.StudentRequest;
 import org.example._18_mony_visa_spring_homework002.Models.Entity.Students;
 import org.example._18_mony_visa_spring_homework002.Repository.StudentRepository;
 import org.example._18_mony_visa_spring_homework002.Services.StudentService;
@@ -32,12 +33,14 @@ public class StudentServiceimpl implements StudentService {
     }
 
     @Override
-    public Students addStudent(Students students) {
-        return studentRepository.addStudent(students);
+    public Students addStudent(StudentRequest studentRequest) {
+        studentRepository.addStudent(studentRequest);
+        studentRepository.addStudentCourse(studentRequest);
+        return studentRepository.addStudent(studentRequest);
     }
 
     @Override
-    public Students updateStudent(Integer updateStudent, Students students) {
+    public Students updateStudent(Integer updateStudent, StudentRequest students) {
         return studentRepository.update(updateStudent, students);
     }
 }

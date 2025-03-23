@@ -1,5 +1,6 @@
 package org.example._18_mony_visa_spring_homework002.Controllers;
 
+import org.example._18_mony_visa_spring_homework002.Models.DTO.Requests.StudentRequest;
 import org.example._18_mony_visa_spring_homework002.Models.DTO.Respones.ApiResponse;
 import org.example._18_mony_visa_spring_homework002.Models.Entity.Students;
 import org.example._18_mony_visa_spring_homework002.Services.StudentService;
@@ -49,18 +50,18 @@ public class StudentController {
         return ResponseEntity.ok(apiResponse);
     }
 
-    @PostMapping("/addStudent")
-    public ResponseEntity<ApiResponse<Students>> addStudent(@RequestBody Students students){
+    @PostMapping("/addStudents")
+    public ResponseEntity<ApiResponse<Students>> addStudent(@RequestBody StudentRequest studentRequest){
         ApiResponse<Students> apiResponse = ApiResponse.<Students>builder()
                 .message("All courses have been successfully fetched.")
-                .payload(studentService.addStudent(students))
+                .payload(studentService.addStudent(studentRequest))
                 .status(HttpStatus.OK)
                 .time(LocalDateTime.now()).build();
         return ResponseEntity.ok(apiResponse);
     }
 
     @PutMapping("/{updateStudent}")
-    public ResponseEntity<ApiResponse<Students>> updateStudent(@RequestParam Integer updateStudent, @RequestBody Students students){
+    public ResponseEntity<ApiResponse<Students>> updateStudent(@RequestParam Integer updateStudent, @RequestBody StudentRequest students){
         ApiResponse<Students> apiResponse = ApiResponse.<Students>builder()
                 .message("All courses have been successfully fetched.")
                 .payload(studentService.updateStudent(updateStudent, students))

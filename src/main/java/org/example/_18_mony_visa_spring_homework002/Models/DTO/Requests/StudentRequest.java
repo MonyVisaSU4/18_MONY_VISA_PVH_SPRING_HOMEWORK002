@@ -14,5 +14,5 @@ public class StudentRequest {
     private String studentName;
     private String email;
     private String phoneNumber;
-    private List<Course> courses;
+    private List<Course> coursesId;
 }

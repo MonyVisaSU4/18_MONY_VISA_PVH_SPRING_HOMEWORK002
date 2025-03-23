@@ -46,16 +46,21 @@ public interface StudentRepository {
 
     @Select("""
         INSERT INTO students(student_id,student_name,email,phone_number)
-        VALUES(default,#{request.studentName},#{request.email},#{request.phoneNumber})
-        RETURNING *;
+        VALUES(default,#{request.studentName},#{request.email},#{request.phoneNumber});
     """)
     @ResultMap("studentMapper")
-    Students addStudent(@Param("request") Students students);
+    Students addStudent(@Param("request") StudentRequest students);
+
+    @Insert("""
+        INSERT INTO student_course VALUES(default,#{request.studentId},#{request.coursesId});
+    """)
+    @ResultMap("studentMapper")
+    Students addStudentCourse(@Param("request") StudentRequest studentRequest);
 
     @Select("""
-        UPDATE students SET student_name='Visa', email='visazin128@gmail.com', phone_number='092822882'
-        WHERE student_id=6
+        UPDATE students SET student_name=#{request.studentName}, email=#{request.email}, phone_number=#{request.phoneNumber}
+        WHERE student_id=#{request.studentId}
         RETURNING *;
     """)
-    Students update(Integer updateStudent, Students students);
+    Students update(Integer updateStudent,@Param("request") StudentRequest students);
 }
